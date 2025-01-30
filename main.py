@@ -4,6 +4,7 @@ from Streamer import Streamer
 from Detector import Detector
 from Presenter import Presenter
 
+FILE_PATH = 'video.mp4'
 def main(file_name):
     # Create queues
     frame_queue = []
@@ -29,5 +30,5 @@ def main(file_name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'finish process for {file_name}')
 
-main('WhatsApp Video 2025-01-13 at 15.56.16_7cacf716.mp4')
+main(FILE_PATH)
 
