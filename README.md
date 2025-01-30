@@ -4,6 +4,7 @@
 
 This project is a real-time video processing pipeline that streams a video, detects motion in frames, and applies blurring to detected motion areas before displaying the processed frames. The system is built using Python with OpenCV and Scikit-Image.
 
+![UML.png](UML.png)
 ## Features
 
 - **Streamer**: Reads video frames from an MP4 file and sends them to a queue.
