@@ -1,16 +1,33 @@
-# This is a sample Python script.
+import threading
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+from Streamer import Streamer
+from Detector import Detector
+from Presenter import Presenter
 
+def main(file_name):
+    # Create queues
+    frame_queue = []
+    detection_queue = []
 
-def print_hi(name):
+    # Start system
+    streamer = Streamer(file_name, frame_queue)
+    detector = Detector(frame_queue, detection_queue, streamer)
+    presenter = Presenter(detection_queue, detector)
+
+    streamer_thread = threading.Thread(target=streamer.stream)
+    detector_thread = threading.Thread(target=detector.detect_motion)
+
+    streamer_thread.start()
+    detector_thread.start()
+
+    # Run presenter on main thread
+    presenter.display()
+
+    # Ensure all threads exit properly
+    streamer_thread.join()
+    detector_thread.join()
     # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+    print(f'finish process for {file_name}')
 
+main('WhatsApp Video 2025-01-13 at 15.56.16_7cacf716.mp4')
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
