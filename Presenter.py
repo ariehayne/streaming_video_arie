@@ -24,6 +24,10 @@ class Presenter:
                 if frame_bgr is None or motion_mask is None:
                     continue
 
+                # k size must be odd number
+                blurred_frame = cv2.GaussianBlur(frame_bgr, (21, 21), 0)
+                frame_bgr[motion_mask] = blurred_frame[motion_mask]
+
                 # Display frame with time overlay
                 cv2.putText(frame_bgr, time_str, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 cv2.imshow("Video", frame_bgr)

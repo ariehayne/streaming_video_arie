@@ -13,6 +13,8 @@ class Detector:
         prev_frame = None
         while self.running:
             if self.queue:
+                # I added this part to improve performance,
+                # It's easier to go with one image (gray) than with 3 images (RGB)
                 frame, timestamp = self.queue.pop(0)
                 gray = color.rgb2gray(frame)
 
